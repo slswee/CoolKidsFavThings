@@ -1,6 +1,7 @@
 .idea/
 out/
 target/
- .bsp/
+.bsp/
 /shelf/
 /workspace.xml
+project/
