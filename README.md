@@ -1,4 +1,5 @@
-## sbt project compiled with Scala 3
+## CoolKidsFavThings
+### sbt project compiled with Scala 3
 
 ### Usage
 
