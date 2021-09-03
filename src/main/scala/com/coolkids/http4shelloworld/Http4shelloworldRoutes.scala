@@ -30,4 +30,15 @@ object Http4shelloworldRoutes {
         } yield resp
     }
   }
+
+  def helloWorldPage[F[_]: Sync]: HttpRoutes[F] = {
+    val dsl = new Http4sDsl[F]{}
+    import dsl._
+    HttpRoutes.of[F] {
+      case GET -> Root / "hello" =>
+        for {
+          resp <- Ok("<h1>\uD83D\uDCA9</h1>")
+        } yield resp
+    }
+  }
 }

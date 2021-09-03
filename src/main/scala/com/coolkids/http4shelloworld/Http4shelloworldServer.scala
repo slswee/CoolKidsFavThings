@@ -22,6 +22,7 @@ object Http4shelloworldServer {
       // want to extract a segments not checked
       // in the underlying routes.
       httpApp = (
+        Http4shelloworldRoutes.helloWorldPage <+>
         Http4shelloworldRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
         Http4shelloworldRoutes.jokeRoutes[F](jokeAlg)
       ).orNotFound
