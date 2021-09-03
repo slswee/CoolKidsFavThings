@@ -1,21 +1,28 @@
 val scala3Version = "3.0.0"
-val zioVersion    = "1.0.9"
-val zhttpVersion  = "1.0.0.0-RC17"
-lazy val root     = project
-  .in(file("."))
+val Http4sVersion = "0.21.27"
+val CirceVersion = "0.13.0"
+val MunitVersion = "0.7.27"
+val LogbackVersion = "1.2.5"
+val MunitCatsEffectVersion = "1.0.5"
+
+lazy val root = (project in file("."))
   .settings(
-    name := "cool-kids-project",
-    version := "0.1.0",
-    scalaVersion := scala3Version,
+    organization := "com.coolkids",
+    name := "http4s-hello-world",
+    version := "0.0.1-SNAPSHOT",
+    scalaVersion := "2.13.6",
     libraryDependencies ++= Seq(
-      "dev.zio"     %% "zio"               % zioVersion,
-      "io.d11"      %% "zhttp"             % zhttpVersion,
-//      "io.d11"      %% "zhttp-test"        % zhttpVersion % Test,
-//      "com.novocode" % "junit-interface"   % "0.11"     % Test,
-      "dev.zio"     %% "zio-test-junit"    % zioVersion % Test,
-      "dev.zio"     %% "zio-test"          % zioVersion % Test,
-      "dev.zio"     %% "zio-test-sbt"      % zioVersion % Test,
-      "dev.zio"     %% "zio-test-magnolia" % zioVersion % Test, // optional
+      "org.http4s"      %% "http4s-blaze-server" % Http4sVersion,
+      "org.http4s"      %% "http4s-blaze-client" % Http4sVersion,
+      "org.http4s"      %% "http4s-circe"        % Http4sVersion,
+      "org.http4s"      %% "http4s-dsl"          % Http4sVersion,
+      "io.circe"        %% "circe-generic"       % CirceVersion,
+      "org.scalameta"   %% "munit"               % MunitVersion           % Test,
+      "org.typelevel"   %% "munit-cats-effect-2" % MunitCatsEffectVersion % Test,
+      "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
+      "org.scalameta"   %% "svm-subs"            % "20.2.0"
     ),
+    addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.13.0" cross CrossVersion.full),
+    addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.1"),
+    testFrameworks += new TestFramework("munit.Framework")
   )
-testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
